@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.fight.FightController">
+   <children>
+      <Button fx:id="fightButton" layoutX="466.0" layoutY="258.0" mnemonicParsing="false" prefWidth="120.0" text="Fight" />
+      <Button fx:id="teamButton" layoutX="466.0" layoutY="293.0" mnemonicParsing="false" prefWidth="120.0" text="Team" />
+      <Button fx:id="bagButton" layoutX="466.0" layoutY="328.0" mnemonicParsing="false" prefWidth="120.0" text="Bag" />
+      <Button fx:id="escapeButton" layoutX="466.0" layoutY="360.0" mnemonicParsing="false" prefWidth="120.0" text="Escape" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.fight.FightController">
+   <children>
+      <VBox layoutX="440.0" layoutY="222.0" prefHeight="185.0" prefWidth="166.0">
+         <children>
+            <Button fx:id="fightButton" mnemonicParsing="false" prefWidth="120.0" text="Fight">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="teamButton" mnemonicParsing="false" prefWidth="120.0" text="Team">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="bagButton" mnemonicParsing="false" prefWidth="120.0" text="Bag">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="escapeButton" mnemonicParsing="false" prefWidth="120.0" text="Escape">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox prefHeight="243.0" prefWidth="601.0">
+         <children>
+            <VBox prefHeight="240.0" prefWidth="298.0">
+               <children>
+                  <ProgressBar fx:id="healthPlayer" prefHeight="18.0" prefWidth="210.0" progress="0.0">
+                     <VBox.margin>
+                        <Insets left="40.0" top="10.0" />
+                     </VBox.margin>
+                  </ProgressBar>
+                  <Circle fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+                     <VBox.margin>
+                        <Insets left="70.0" top="50.0" />
+                     </VBox.margin>
+                  </Circle>
+               </children>
+            </VBox>
+            <VBox prefHeight="237.0" prefWidth="303.0">
+               <children>
+                  <ProgressBar fx:id="healthOpponent" prefHeight="18.0" prefWidth="210.0" progress="0.0">
+                     <VBox.margin>
+                        <Insets left="40.0" top="10.0" />
+                     </VBox.margin>
+                  </ProgressBar>
+                  <Circle fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+                     <VBox.margin>
+                        <Insets left="80.0" top="50.0" />
+                     </VBox.margin>
+                  </Circle>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
