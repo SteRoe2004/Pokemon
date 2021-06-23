@@ -1,14 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.fight.FightController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.fight.FightController">
    <children>
-      <Button fx:id="fightButton" layoutX="466.0" layoutY="258.0" mnemonicParsing="false" prefWidth="120.0" text="Fight" />
-      <Button fx:id="teamButton" layoutX="466.0" layoutY="293.0" mnemonicParsing="false" prefWidth="120.0" text="Team" />
-      <Button fx:id="bagButton" layoutX="466.0" layoutY="328.0" mnemonicParsing="false" prefWidth="120.0" text="Bag" />
-      <Button fx:id="escapeButton" layoutX="466.0" layoutY="360.0" mnemonicParsing="false" prefWidth="120.0" text="Escape" />
+      <VBox fx:id="vBoxEscape" layoutX="305.0" layoutY="222.0" prefHeight="170.0" prefWidth="156.0">
+         <children>
+            <Button fx:id="runButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="runButton">
+               <VBox.margin>
+                  <Insets left="30.0" top="135.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="vBoxBag" layoutX="310.0" layoutY="222.0" prefHeight="185.0" prefWidth="166.0">
+         <children>
+            <Button fx:id="item1" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="item1">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="item2" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="item2">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="item3" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="item3">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="item4" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="item4">
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="vBoxTeam" layoutX="322.0" layoutY="220.0" prefHeight="185.0" prefWidth="133.0">
+         <children>
+            <Button fx:id="pokemon1" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon1">
+               <VBox.margin>
+                  <Insets left="20.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="pokemon2" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon2">
+               <VBox.margin>
+                  <Insets left="20.0" top="2.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="pokemon3" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon3">
+               <VBox.margin>
+                  <Insets left="20.0" top="2.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="pokemon4" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon4">
+               <VBox.margin>
+                  <Insets left="20.0" top="2.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="pokemon5" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon5">
+               <VBox.margin>
+                  <Insets left="20.0" top="2.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="pokemon6" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon6">
+               <VBox.margin>
+                  <Insets left="20.0" top="2.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="vBoxFight" layoutX="322.0" layoutY="222.0" prefHeight="176.0" prefWidth="133.0">
+         <children>
+            <Button fx:id="attackmove1" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Move1">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="attackmove2" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Move2">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="attackmove3" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Move3">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="attackmove4" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Move4">
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="440.0" layoutY="222.0" prefHeight="185.0" prefWidth="166.0">
+         <children>
+            <Button fx:id="fightButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Fight">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="teamButton" mnemonicParsing="false" prefWidth="120.0" text="Team">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="bagButton" mnemonicParsing="false" prefWidth="120.0" text="Bag">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="escapeButton" mnemonicParsing="false" prefWidth="120.0" text="Escape">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox prefHeight="243.0" prefWidth="601.0">
+         <children>
+            <VBox prefHeight="240.0" prefWidth="298.0">
+               <children>
+                  <ProgressBar fx:id="healthPlayer" prefHeight="18.0" prefWidth="210.0" progress="0.0">
+                     <VBox.margin>
+                        <Insets left="40.0" top="10.0" />
+                     </VBox.margin>
+                  </ProgressBar>
+                  <Circle fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+                     <VBox.margin>
+                        <Insets left="70.0" top="50.0" />
+                     </VBox.margin>
+                  </Circle>
+               </children>
+            </VBox>
+            <VBox prefHeight="237.0" prefWidth="303.0">
+               <children>
+                  <ProgressBar fx:id="healthOpponent" prefHeight="18.0" prefWidth="210.0" progress="0.0">
+                     <VBox.margin>
+                        <Insets left="40.0" top="10.0" />
+                     </VBox.margin>
+                  </ProgressBar>
+                  <Circle fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+                     <VBox.margin>
+                        <Insets left="80.0" top="50.0" />
+                     </VBox.margin>
+                  </Circle>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" />
    </children>
 </AnchorPane>

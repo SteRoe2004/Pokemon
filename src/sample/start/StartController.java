@@ -40,8 +40,6 @@ public class StartController {
     @FXML
     private void sceneSwitch(ActionEvent event) throws IOException, URISyntaxException {
 
-
-
         Parent root = loader.load(getClass().getResource("/fight.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.sizeToScene();
