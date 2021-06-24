@@ -10,6 +10,4 @@ Pokemon haben Attribute: Health, Speed, Type
 
 Startbildschrim menu einfügen (vllt mehrere Kampfszenarien)
 
-
-
-BTW: Pokemonklasse grün
+Textfeld --> Kommentare, was passiert
