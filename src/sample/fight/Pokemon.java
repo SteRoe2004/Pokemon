@@ -1,5 +1,8 @@
 package sample.fight;
 
+import java.awt.*;
+import java.util.List;
+
 public class Pokemon {
 
     private String name;
@@ -14,11 +17,11 @@ public class Pokemon {
     private Attack attack3;
     private Attack attack4;
 
-    public Pokemon(String name, int speed, int currentHP, int maxHP, Type type, Attack attack1, Attack attack2, Attack attack3, Attack attack4){
-        setAttack1(attack1);
-        setAttack2(attack2);
-        setAttack3(attack3);
-        setAttack4(attack4);
+    public Pokemon(String name, int speed, int currentHP, int maxHP, Type type, List<Attack> list){
+        setAttack1(list.get(0));
+        setAttack2(list.get(1));
+        setAttack3(list.get(2));
+        setAttack4(list.get(3));
         setCurrentHP(currentHP);
         setMaxHP(maxHP);
         setType(type);

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -60,17 +61,17 @@
                   <Insets left="20.0" top="2.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="pokemon4" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon4">
+            <Button fx:id="pokemon4" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="frei">
                <VBox.margin>
                   <Insets left="20.0" top="2.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="pokemon5" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon5">
+            <Button fx:id="pokemon5" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="frei">
                <VBox.margin>
                   <Insets left="20.0" top="2.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="pokemon6" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="Pokemon6">
+            <Button fx:id="pokemon6" mnemonicParsing="false" prefHeight="21.0" prefWidth="117.0" text="frei">
                <VBox.margin>
                   <Insets left="20.0" top="2.0" />
                </VBox.margin>
@@ -134,6 +135,7 @@
                         <Insets left="40.0" top="10.0" />
                      </VBox.margin>
                   </ProgressBar>
+                  <Label fx:id="namemypokemon" text="Label" />
                   <Circle fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE">
                      <VBox.margin>
                         <Insets left="70.0" top="50.0" />
@@ -148,6 +150,7 @@
                         <Insets left="40.0" top="10.0" />
                      </VBox.margin>
                   </ProgressBar>
+                  <Label fx:id="nameopppokemon" text="Label" />
                   <Circle fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE">
                      <VBox.margin>
                         <Insets left="80.0" top="50.0" />
