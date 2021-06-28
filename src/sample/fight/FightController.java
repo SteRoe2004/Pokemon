@@ -1,6 +1,10 @@
 package sample.fight;
 
 import com.sun.xml.internal.ws.api.ha.HaInfo;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -9,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import sample.stats.AttackLib;
 
 import java.io.IOException;
@@ -17,6 +22,8 @@ import java.util.List;
 
 import static sample.Main.loader;
 import static sample.Main.primaryStage;
+
+import sample.end.EndController;
 
 public class FightController {
 
@@ -113,6 +120,9 @@ public class FightController {
     private Label nameopppokemon;
 
 
+    public IntegerProperty observerOwn;
+    public IntegerProperty observerOpp;
+
     @FXML
     private void initialize() {
 
@@ -128,6 +138,25 @@ public class FightController {
         initBag();
 
         initTeam();
+
+
+        observerOwn = new SimpleIntegerProperty(opppokemon.getCurrentHP());
+        observerOpp = new SimpleIntegerProperty(mypokemon.getCurrentHP());
+
+        observerOpp.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                opppokemonDead((Integer) newValue);
+            }
+        });
+
+        observerOwn.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mypokemonDead((Integer) newValue);
+            }
+        });
+
 
         healthPlayer.setProgress(1);
         healthOpponent.setProgress(1);
@@ -202,37 +231,61 @@ public class FightController {
                 e.printStackTrace();
             }
         });
+    }
 
 
+    public void mypokemonDead(Integer primaryStage) {
+        observerOwn.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (mypokemon.getCurrentHP() <= 0) {
+                    System.out.println("imagine dying");
+                    sceneSwitch();
+                }
+            }
+        });
+    }
+
+    public void opppokemonDead(Integer primaryStage) {
+        observerOwn.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (mypokemon.getCurrentHP() <= 0) {
+
+                    System.out.println("imgine dying");
+                    sceneSwitch();
+                }
+            }
+        });
     }
 
     private void initPokemon1() {
-        this.mypokemon = new Pokemon("Charizard", 150, 400, 400, Type.FIRE,AttackLib.getAttacks(Type.FIRE,4));
+        this.mypokemon = new Pokemon("Charizard", 150, 400, 400, Type.FIRE, AttackLib.getAttacks(Type.FIRE, 4));
     }
 
     private void initPokemon2() {
-        this.mypokemon = new Pokemon("Blastoise", 120, 410, 410, Type.WATER,AttackLib.getAttacks(Type.WATER,4));
+        this.mypokemon = new Pokemon("Blastoise", 120, 410, 410, Type.WATER, AttackLib.getAttacks(Type.WATER, 4));
 
     }
 
     private void initPokemon3() {
-        this.mypokemon = new Pokemon("Venusaur", 125, 415, 415, Type.GRASS,AttackLib.getAttacks(Type.FIRE,4));
+        this.mypokemon = new Pokemon("Venusaur", 125, 415, 415, Type.GRASS, AttackLib.getAttacks(Type.GRASS, 4));
 
     }
 
     private void initPokemon4() {
-        this.opppokemon = new Pokemon("Emboar", 100, 420, 420, Type.FIRE,AttackLib.getAttacks(Type.FIRE,4));
+        this.opppokemon = new Pokemon("Emboar", 100, 420, 420, Type.FIRE, AttackLib.getAttacks(Type.FIRE, 4));
 
     }
 
     private void initPokemon5() {
-        this.opppokemon = new Pokemon("Samurott", 121, 405, 405, Type.WATER,AttackLib.getAttacks(Type.WATER,4));
+        this.opppokemon = new Pokemon("Samurott", 121, 405, 405, Type.WATER, AttackLib.getAttacks(Type.WATER, 4));
 
     }
 
     public void initPokemon6() {
-        List<Attack> grassOnly = AttackLib.getAttacks(Type.GRASS,4);
-        this.opppokemon = new Pokemon("Serperior", 140, 390, 390, Type.GRASS,grassOnly);
+        List<Attack> grassOnly = AttackLib.getAttacks(Type.GRASS, 4);
+        this.opppokemon = new Pokemon("Serperior", 140, 390, 390, Type.GRASS, grassOnly);
 
     }
 
@@ -245,17 +298,16 @@ public class FightController {
     }
 
     private void initTeam() {
-        Pokemon pokemon1 = new Pokemon("Venusaur", 125, 415, 415, Type.GRASS,AttackLib.getAttacks(Type.GRASS,4));
-        Pokemon pokemon2 = new Pokemon("Charizard", 150, 400, 400, Type.FIRE,AttackLib.getAttacks(Type.FIRE,4));
-        Pokemon pokemon3 = new Pokemon("Blastoise", 120, 410, 410, Type.WATER,AttackLib.getAttacks(Type.WATER,4));
+        Pokemon pokemon1 = new Pokemon("Venusaur", 125, 415, 415, Type.GRASS, AttackLib.getAttacks(Type.GRASS, 4));
+        Pokemon pokemon2 = new Pokemon("Charizard", 150, 400, 400, Type.FIRE, AttackLib.getAttacks(Type.FIRE, 4));
+        Pokemon pokemon3 = new Pokemon("Blastoise", 120, 410, 410, Type.WATER, AttackLib.getAttacks(Type.WATER, 4));
         this.myTeam = new Team(pokemon1, pokemon2, pokemon3);
 
-        Pokemon pokemon4 = new Pokemon("Serperior", 140, 390, 390, Type.GRASS,AttackLib.getAttacks(Type.GRASS,4));
-        Pokemon pokemon5 = new Pokemon("Emboar", 100, 420, 420, Type.FIRE,AttackLib.getAttacks(Type.FIRE,4));
-        Pokemon pokemon6 = new Pokemon("Samurott", 121, 405, 405, Type.WATER,AttackLib.getAttacks(Type.WATER,4));
+        Pokemon pokemon4 = new Pokemon("Serperior", 140, 390, 390, Type.GRASS, AttackLib.getAttacks(Type.GRASS, 4));
+        Pokemon pokemon5 = new Pokemon("Emboar", 100, 420, 420, Type.FIRE, AttackLib.getAttacks(Type.FIRE, 4));
+        Pokemon pokemon6 = new Pokemon("Samurott", 121, 405, 405, Type.WATER, AttackLib.getAttacks(Type.WATER, 4));
         this.oppTeam = new Team(pokemon4, pokemon5, pokemon6);
     }
-
 
 
     @FXML
@@ -356,9 +408,9 @@ public class FightController {
         pokemon1.setText(myTeam.getPokemon1().getName());
         pokemon2.setText(myTeam.getPokemon2().getName());
         pokemon3.setText(myTeam.getPokemon3().getName());
-  //     pokemon4.setText(myTeam.getPokemon4().getName());
-  //     pokemon5.setText(myTeam.getPokemon5().getName());
-  //     pokemon6.setText(myTeam.getPokemon6().getName());
+        //     pokemon4.setText(myTeam.getPokemon4().getName());
+        //     pokemon5.setText(myTeam.getPokemon5().getName());
+        //     pokemon6.setText(myTeam.getPokemon6().getName());
     }
 
     @FXML
@@ -451,7 +503,6 @@ public class FightController {
     }
 
 
-
     @FXML
     private void attack(int number) {
         Attack attack;
@@ -472,36 +523,74 @@ public class FightController {
                 throw new RuntimeException();
         }
         System.out.println(mypokemon.getName() + " used attack " + attack.getName());
-        int healthPlayer = mypokemon.getCurrentHP();
+        int healthPlayer477 = mypokemon.getCurrentHP();
+        int healthOpp = opppokemon.getCurrentHP();
         int newHealth = opppokemon.getCurrentHP() - attack.getDamage();
-        double hpProgress = newHealth/ (double) opppokemon.getMaxHP();
+        double hpProgress = newHealth / (double) opppokemon.getMaxHP();
+        System.out.println("Opp Hp before attack: " + opppokemon.getCurrentHP() + "Attack Str: " + attack.getDamage());
         opppokemon.setCurrentHP(newHealth);
+        System.out.println("Opp Hp after attack: " + opppokemon.getCurrentHP() + "Calculated Hp after attack" + newHealth);
 
         if (hpProgress < 0) {
-            hpProgress =0;
+            hpProgress = 0;
         }
         if (hpProgress > 1) {
-            hpProgress =1;
+            hpProgress = 1;
         }
-        if(0.5 < hpProgress && hpProgress <= 1){
-            healthOpponent.setStyle("#49e020");
-        }
-        if (0.15 < hpProgress && hpProgress >= 0.5) {
-        } else {
-            healthOpponent.setStyle("#ffce1c");
-        }
-        if(hpProgress <= 0.15){
-            healthOpponent.setStyle("#fd1b10");
-        }
+
         this.healthOpponent.setProgress(hpProgress);
-        // Get own pokemon health
-        //Get enemy pokemon health
-        //set hp of enemy pokemom
-        //Do attack for opponent(rrandom9
-        //set progressbar to currenthealth/max
-        //set hp of ally pokemom
-        //set progressbar to currenthealth/max
+
+
+        switch ((int) (Math.random() * 4)) {
+            case 1:
+                attack = opppokemon.getAttack1();
+                break;
+            case 2:
+                attack = opppokemon.getAttack2();
+                break;
+            case 3:
+                attack = opppokemon.getAttack3();
+                break;
+            case 4:
+                attack = opppokemon.getAttack4();
+                break;
+            default:
+                throw new RuntimeException();
+        }
+        System.out.println(opppokemon.getName() + " used attack " + attack.getName());
+        int healthPlayer1 = mypokemon.getCurrentHP();
+        int newHealth2 = mypokemon.getCurrentHP() - attack.getDamage();
+        double hpProgress2 = newHealth2 / (double) mypokemon.getMaxHP();
+        mypokemon.setCurrentHP(newHealth2);
+
+        if (hpProgress2 < 0) {
+            hpProgress2 = 0;
+        }
+        if (hpProgress2 > 1) {
+            hpProgress2 = 1;
+        }
+
+
+        healthPlayer.setStyle("-fx-accent: #49e020;");
+        if (hpProgress2 < 0.5 ) {
+        healthPlayer.setStyle("-fx-accent: #f6ba41;");
+        }
+        else if (hpProgress2 < 0.2) {
+        healthPlayer.setStyle("-fx-accent: #fd1b10;");
+        }
+
+        healthOpponent.setStyle("-fx-accent: #49e020;");
+        if (hpProgress < 0.5 ) {
+        healthOpponent.setStyle("-fx-accent: #f6ba41;");
+        }
+        else if (hpProgress < 0.2) {
+        healthOpponent.setStyle("-fx-accent: #fd1b10;");
+        }
+
+        this.healthPlayer.setProgress(hpProgress2);
+
     }
+
 
     @FXML
     private void heal(int number) {
@@ -523,8 +612,37 @@ public class FightController {
                 throw new RuntimeException();
         }
         System.out.println("You used " + item.getName());
-    }
+        int heathPlayer1 = mypokemon.getCurrentHP();
+        int newHealth2 = mypokemon.getCurrentHP() + item.getHeal();
+        double hpProgress2 = newHealth2 / (double) mypokemon.getMaxHP();
+        System.out.println("My Hp before attack: " + mypokemon.getCurrentHP() + "Item Str: " + item.getHeal());
+        System.out.println("My Hp after attack: " + mypokemon.getCurrentHP() + "Calculated Hp after attack" + newHealth2);
 
+
+        if (hpProgress2 < 0) {
+            hpProgress2 = 0;
+        } else if (hpProgress2 > 1) {
+            hpProgress2 = 1;
+        }
+
+        this.healthPlayer.setProgress(hpProgress2);
+
+
+        System.out.println("Opponent used " + item.getName());
+        int heathOpponent = opppokemon.getCurrentHP();
+        int newHealth = opppokemon.getCurrentHP() + item.getHeal();
+        double hpProgress = newHealth / (double) opppokemon.getMaxHP();
+        System.out.println("My Hp before attack: " + opppokemon.getCurrentHP() + "Item Str: " + item.getHeal());
+        System.out.println("My Hp after attack: " + opppokemon.getCurrentHP() + "Calculated Hp after attack" + newHealth);
+
+        if (hpProgress < 0) {
+            hpProgress = 0;
+        } else if (hpProgress > 1) {
+            hpProgress = 1;
+        }
+
+        this.healthOpponent.setProgress(hpProgress);
+    }
 
     @FXML
     private void test() {
@@ -583,7 +701,19 @@ public class FightController {
                 break;
 
      */
+
+    @FXML
+    private void sceneSwitch() {
+        Parent root = null;
+        try {
+            root = loader.load(getClass().getResource("/end.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        primaryStage.setScene(new Scene(root));
+        primaryStage.sizeToScene();
+        primaryStage.centerOnScreen();
+        primaryStage.show();
+    }
 }
-
-
 

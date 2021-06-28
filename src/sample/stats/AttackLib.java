@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
+
 
 public class AttackLib {
     public static Map<Type,List> attackLib;
@@ -21,15 +23,22 @@ public class AttackLib {
 
     public static List<Attack> getAttacks(Type type, int numberOfAttacks) {
         List<Attack> attacksByType = AttackLib.getInstance().get(type);
-        List ret = new ArrayList();
+        List<Attack> ret = new ArrayList();
 
-        //get a attack from 0 to end of list
-        //do this numberOfAttacks amount of times
+        ArrayList <Integer> list = new ArrayList<Integer>();
+        for (int i=0; i< numberOfAttacks; i++) {
+            list.add(i);
+        }
+        Collections.shuffle(list);
+
         for (int i=0; i < numberOfAttacks; i++) {
-            ret.add(attacksByType.get((int) (Math.random() * attacksByType.size())));
+            ret.add(attacksByType.get( list.get(i) ));
         }
         return ret;
     }
+
+    //get a attack from 0 to end of list
+    //do this numberOfAttacks amount of times      Î
 
     public static void initAttacks(){
         attackLib = new HashMap<>();
