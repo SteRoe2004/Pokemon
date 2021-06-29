@@ -1,6 +1,11 @@
 package sample.fight;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Team {
+
+    public List<Pokemon> team = new ArrayList<>();
 
    private Pokemon pokemon1;
    private Pokemon pokemon2;
@@ -10,9 +15,13 @@ public class Team {
    //private Pokemon pokemon6;
 
    public Team(Pokemon pokemon1, Pokemon pokemon2, Pokemon pokemon3){
-    setPokemon1 (pokemon1);
-    setPokemon2 (pokemon2);
-    setPokemon3 (pokemon3);
+       setPokemon1 (pokemon1);
+       setPokemon2 (pokemon2);
+       setPokemon3 (pokemon3);
+       team.add(this.pokemon1);
+       team.add(this.pokemon2);
+       team.add(this.pokemon3);
+
    }
 
     public Pokemon getPokemon1() {
@@ -62,5 +71,14 @@ public class Team {
    // public void setPokemon6(Pokemon pokemon6) {
    //     this.pokemon6 = pokemon6;
    // }
+
+    public Pokemon getfirstPokemonwithHP() {
+        for (Pokemon p : team) {
+            if (p.getCurrentHP() > 0) {
+                return p;
+            }
+        }
+        return null;
+    }
 
 }

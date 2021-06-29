@@ -35,7 +35,6 @@ public enum Type {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     String getColour(){
@@ -51,5 +50,6 @@ public enum Type {
         }
 
     }
+
 }
 
