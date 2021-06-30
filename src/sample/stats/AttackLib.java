@@ -67,7 +67,7 @@ public class AttackLib {
         waterlist.add(new Attack("Water Pulse", 45, Type.WATER));
         waterlist.add(new Attack("Razor Shell", 90, Type.WATER));
         waterlist.add(new Attack("Aquajet", 65, Type.WATER));
-        waterlist.add(new Attack("Aquatail", 100, Type.WATER));
+        waterlist.add(new Attack("Aquatail", 110, Type.WATER));
         waterlist.add(new Attack("Dive", 80, Type.WATER));
         waterlist.add(new Attack("Water Gun", 40, Type.WATER));
         waterlist.add(new Attack("Hydro Pump", 110, Type.WATER));

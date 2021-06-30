@@ -5,10 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.end.EndController">
    <children>
-      <Button fx:id="returntostartButton" layoutX="225.0" layoutY="200.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" text="Return to Start" />
+      <Button fx:id="returnButton" layoutX="225.0" layoutY="200.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" text="Return to Start" />
       <Label layoutX="144.0" layoutY="82.0" prefHeight="51.0" prefWidth="312.0" text="GAME OVER">
          <font>
             <Font name="Courier New" size="56.0" />

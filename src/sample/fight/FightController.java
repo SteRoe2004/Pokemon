@@ -11,11 +11,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import sample.stats.AttackLib;
 
+
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Random;
 
 import static sample.Main.loader;
 import static sample.Main.primaryStage;
@@ -114,10 +118,18 @@ public class FightController {
     @FXML
     private Label nameopppokemon;
 
+    @FXML
+    private ImageView ownImage;
+
+    @FXML
+    private ImageView oppImage;
+
+    @FXML
+    private TextArea chatWindow;
+
 
     public IntegerProperty observerOwn;
     public IntegerProperty observerOpp;
-
 
     @FXML
     private void initialize() {
@@ -133,12 +145,16 @@ public class FightController {
 
         initButtons();
 
+        chatLog("");
 
         healthPlayer.setProgress(1);
         healthOpponent.setProgress(1);
+        updateColours();
 
         namemypokemon.setText(mypokemon.getName());
+        ownImage.setImage(mypokemon.render());
         nameopppokemon.setText(opppokemon.getName());
+        oppImage.setImage(opppokemon.render());
 
         attackmove1.setVisible(false);
         attackmove1.setDisable(true);
@@ -185,7 +201,7 @@ public class FightController {
 
 
     public void mypokemonDead() throws IOException, URISyntaxException {
-        System.out.println("My " + mypokemon.getName() + " was defeated");
+        chatLog("My " + mypokemon.getName() + " was defeated");
         //for (Pokemon p: myTeam.team) {
         //    if(p.getCurrentHP() > 0){
         //        oppExchange();
@@ -195,13 +211,8 @@ public class FightController {
     }
 
     public void opppokemonDead() throws IOException, URISyntaxException {
-        System.out.println("Enemy " + opppokemon.getName() + " was defeated");
-        for (Pokemon p : oppTeam.team) {
-            if (p.getCurrentHP() > 0) {
-                oppExchange();
-                return;
-            }
-        }
+        chatLog("Enemy " + opppokemon.getName() + " was defeated");
+        oppExchange();
 
     }
 
@@ -215,15 +226,15 @@ public class FightController {
     }
 
     private void initTeam() {
-        Pokemon pokemon1 = new Pokemon("Venusaur", 125, 415, 415, Type.GRASS, AttackLib.getAttacks(Type.GRASS, 4));
-        Pokemon pokemon2 = new Pokemon("Charizard", 150, 400, 400, Type.FIRE, AttackLib.getAttacks(Type.FIRE, 4));
-        Pokemon pokemon3 = new Pokemon("Blastoise", 120, 410, 410, Type.WATER, AttackLib.getAttacks(Type.WATER, 4));
+        Pokemon pokemon1 = new Pokemon("Venusaur", 125, 415, 415, Type.GRASS, "./res/Venusaur.png", AttackLib.getAttacks(Type.GRASS, 4));
+        Pokemon pokemon2 = new Pokemon("Charizard", 150, 400, 400, Type.FIRE, "./res/charizard.png", AttackLib.getAttacks(Type.FIRE, 4));
+        Pokemon pokemon3 = new Pokemon("Blastoise", 120, 410, 410, Type.WATER, "./res/Blastoise.png", AttackLib.getAttacks(Type.WATER, 4));
         this.myTeam = new Team(pokemon1, pokemon2, pokemon3);
         this.mypokemon = myTeam.getPokemon1();
 
-        Pokemon pokemon4 = new Pokemon("Serperior", 140, 390, 390, Type.GRASS, AttackLib.getAttacks(Type.GRASS, 4));
-        Pokemon pokemon5 = new Pokemon("Emboar", 100, 420, 420, Type.FIRE, AttackLib.getAttacks(Type.FIRE, 4));
-        Pokemon pokemon6 = new Pokemon("Samurott", 121, 405, 405, Type.WATER, AttackLib.getAttacks(Type.WATER, 4));
+        Pokemon pokemon4 = new Pokemon("Serperior", 140, 390, 390, Type.GRASS, "./res/serperior.png", AttackLib.getAttacks(Type.GRASS, 4));
+        Pokemon pokemon5 = new Pokemon("Emboar", 100, 420, 420, Type.FIRE, "./res/Emboar.png", AttackLib.getAttacks(Type.FIRE, 4));
+        Pokemon pokemon6 = new Pokemon("Samurott", 121, 405, 405, Type.WATER, "./res/Samurott.png", AttackLib.getAttacks(Type.WATER, 4));
         this.oppTeam = new Team(pokemon4, pokemon5, pokemon6);
         this.opppokemon = oppTeam.getPokemon1();
 
@@ -236,7 +247,7 @@ public class FightController {
         observerOpp.addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                System.out.println(newValue);
+                chatLog("Your Pokémon currently has " + newValue.toString() + " HP");  //TODO Bei Bedarf entfernen sollte es stören (HP-Kommentar)
                 updateColours();
                 if ((int) newValue <= 0) {
                     try {
@@ -253,7 +264,7 @@ public class FightController {
         observerOwn.addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                System.out.println(newValue);
+                chatLog("The opponent's Pokémon currently has " + newValue.toString() + " HP");  //TODO Bei Bedarf entfernen sollte es stören (HP-Kommentar)
                 if ((int) newValue <= 0) {
                     try {
                         mypokemonDead();
@@ -268,7 +279,7 @@ public class FightController {
 
     }
 
-    private void initButtons(){
+    private void initButtons() {
         fightButton.setOnAction(event -> openAttackSelector());
         teamButton.setOnAction(event -> openPokemonSelector());
         bagButton.setOnAction(event -> openItemSelector());
@@ -361,13 +372,20 @@ public class FightController {
     }
 
     @FXML
-    private void oppExchange() {
+    public void oppExchange() {
         Pokemon x = oppTeam.getfirstPokemonwithHP();
         if (x != null) {
-            System.out.println("first pokemon with + hp is:" + x.getName() + "with hp" + x.getCurrentHP());
             opppokemon = x;
             nameopppokemon.setText(opppokemon.getName());
+            oppImage.setImage(opppokemon.render());
             healthOpponent.setProgress(1);
+        } else {
+            try {
+                sceneSwitch();
+                chatLog("You won!");
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -476,14 +494,49 @@ public class FightController {
         vBoxEscape.setDisable(false);
     }
 
+    private void handlePokemon() {
+        if (opppokemon.getCurrentHP() <= 0) {
+            opppokemon = oppTeam.getfirstPokemonwithHP();
+        }
+        if (oppTeam.getfirstPokemonwithHP() == null) {
+            try {
+                sceneSwitch();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        if (mypokemon.getCurrentHP() <= 0) {
+            mypokemon = myTeam.getfirstPokemonwithHP();
+        }
+        if (myTeam.getfirstPokemonwithHP() == null) {
+            try {
+                sceneSwitch();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 
     @FXML
     private void attack(int number) {
-        Attack attack = selectAttack(number, true);
-        executeAttack(attack, true);
+        Attack attackMe = selectAttack(number, true);
+        Attack attackOpp = selectAttack(number, false);
 
-        attack = selectAttack(number, false);
-        executeAttack(attack, false);
+        randomheal();
+
+        if (mypokemon.getSpeed() >= opppokemon.getSpeed()) {
+            executeAttack(attackMe, true);
+            executeAttack(attackOpp, false);
+        } else {
+            executeAttack(attackOpp, false);
+            executeAttack(attackMe, true);
+        }
 
         updateColours();
 
@@ -507,15 +560,19 @@ public class FightController {
         }
         int newHealth = pokemon.getCurrentHP() - attack.getDamage();
         double hpProgress = newHealth / (double) pokemon.getMaxHP();
+        if (forPlayer) {
+            chatLog(mypokemon.getName() + " used " + attack.getName());
+        } else {
+            chatLog(opppokemon.getName() + " used " + attack.getName());
+        }
         pokemon.setCurrentHP(newHealth);
 
         hpProgress = validateProgress(hpProgress);
 
-
         health.setProgress(hpProgress);
         observer.setValue(pokemon.getCurrentHP());
-
     }
+
 
     private double validateProgress(double hpProgress) {
         if (hpProgress < 0) {
@@ -525,6 +582,8 @@ public class FightController {
             hpProgress = 1;
         }
         return hpProgress;
+
+
     }
 
     private void updateColours() {
@@ -592,53 +651,61 @@ public class FightController {
             default:
                 throw new RuntimeException();
         }
-        System.out.println("You used " + item.getName());
+
+        executeheal(item, mypokemon);
+        updateColours();
+
+
+    }
+
+    private void executeheal(Item item, Pokemon pokemon) {
+
+        ProgressBar health;
+        IntegerProperty observer;
+
+        if (myTeam.team.contains(pokemon)) {
+            health = healthPlayer;
+            observer = observerOwn;
+        } else {
+            health = healthOpponent;
+            observer = observerOpp;
+
+        }
+
+        chatLog("You used " + item.getName());
         int heathPlayer1 = mypokemon.getCurrentHP();
         int newHealth2 = mypokemon.getCurrentHP() + item.getHeal();
         double hpProgress2 = newHealth2 / (double) mypokemon.getMaxHP();
-
-
-        if (hpProgress2 < 0) {
-            hpProgress2 = 0;
-        } else if (hpProgress2 > 1) {
-            hpProgress2 = 1;
-        }
-
         this.healthPlayer.setProgress(hpProgress2);
+        mypokemon.setCurrentHP(newHealth2);
+
+        hpProgress2 = validateProgress(hpProgress2);
+        health.setProgress(hpProgress2);
+        observer.setValue(pokemon.getCurrentHP());
+    }
+
+    private void executehealOpp(Item item, Pokemon pokemon) {
+        ProgressBar health;
+        IntegerProperty observer;
+
+        health = healthOpponent;
+        observer = observerOpp;
 
 
-        System.out.println("Opponent used " + item.getName());
+        chatLog("Opponent used " + item.getName());
         int heathOpponent = opppokemon.getCurrentHP();
         int newHealth = opppokemon.getCurrentHP() + item.getHeal();
         double hpProgress = newHealth / (double) opppokemon.getMaxHP();
-        System.out.println("My Hp before attack: " + opppokemon.getCurrentHP() + "Item Str: " + item.getHeal());
-        System.out.println("My Hp after attack: " + opppokemon.getCurrentHP() + "Calculated Hp after attack" + newHealth);
-
-        if (hpProgress < 0) {
-            hpProgress = 0;
-        } else if (hpProgress > 1) {
-            hpProgress = 1;
-        }
-
-        healthPlayer.setStyle("-fx-accent: #49e020;");
-        if (hpProgress2 < 0.5) {
-            healthPlayer.setStyle("-fx-accent: #f6ba41;");
-        } else if (hpProgress2 < 0.2) {
-            healthPlayer.setStyle("-fx-accent: #fd1b10;");
-        }
-        healthOpponent.setStyle("-fx-accent: #49e020;");
-        if (hpProgress < 0.5) {
-            healthOpponent.setStyle("-fx-accent: #f6ba41;");
-        } else if (hpProgress < 0.2) {
-            healthOpponent.setStyle("-fx-accent: #fd1b10;");
-        }
-
         this.healthOpponent.setProgress(hpProgress);
+        opppokemon.setCurrentHP(newHealth);
+
+        hpProgress = validateProgress(hpProgress);
+
     }
 
     @FXML
     private void test() {
-        System.out.println("test");
+        chatLog("test");
     }
 
     @FXML
@@ -655,21 +722,22 @@ public class FightController {
                 pokemon = myTeam.getPokemon3();
                 break;
             case 4:
-                System.out.println("Please select an existing Pokémon");
+                chatLog("Please select an existing Pokémon");
                 break;
             case 5:
-                System.out.println("Please select an existing Pokémon");
+                chatLog("Please select an existing Pokémon");
                 break;
             case 6:
-                System.out.println("Please select an existing Pokémon");
+                chatLog("Please select an existing Pokémon");
                 break;
             default:
                 throw new RuntimeException();
         }
         String oldName = this.mypokemon.getName();
         this.mypokemon = pokemon;
-        System.out.println(mypokemon.getName() + " was swapped with " + oldName);
+        chatLog(mypokemon.getName() + " was swapped with " + oldName);
         namemypokemon.setText(mypokemon.getName());
+        ownImage.setImage(mypokemon.render());
         healthPlayer.setProgress(mypokemon.getCurrentHP());
     }
 
@@ -681,7 +749,7 @@ public class FightController {
         primaryStage.sizeToScene();
         primaryStage.centerOnScreen();
         primaryStage.show();
-        System.out.println("You escaped the fight!");
+        chatLog("You escaped the fight!");
     }
 
     /*            case 4:
@@ -697,12 +765,44 @@ public class FightController {
      */
 
     @FXML
-    private void sceneSwitch() throws IOException, URISyntaxException {
+    public void sceneSwitch() throws IOException, URISyntaxException {
         Parent root = loader.load(getClass().getResource("/end.fxml"));
         primaryStage.setScene(new Scene(root));
         primaryStage.sizeToScene();
         primaryStage.centerOnScreen();
         primaryStage.show();
     }
-}
 
+    @FXML
+    private void chatLog(String chat) {
+        chatWindow.appendText("\n" + chat);
+    }
+
+    private void randomheal(){
+        if (Math.random() <= 0.1){
+            Item item;
+            int number = new Random().nextInt(3)+1;
+            switch (number) {
+                case 1:
+                    item = mybag.getItem1();
+                    break;
+                case 2:
+                    item = mybag.getItem2();
+                    break;
+                case 3:
+                    item = mybag.getItem3();
+                    break;
+                case 4:
+                    item = mybag.getItem4();
+                    break;
+                default:
+                    throw new RuntimeException();
+            }
+
+            executehealOpp(item, opppokemon);
+            updateColours();
+        }
+    }
+
+
+}

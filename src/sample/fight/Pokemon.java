@@ -1,14 +1,23 @@
 package sample.fight;
 
+import javafx.scene.Parent;
+
 import java.awt.*;
+import java.io.FileInputStream;
 import java.util.List;
 
-public class Pokemon {
+import javafx.scene.image.Image;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+public class Pokemon extends Parent {
+
 
     private String name;
     private int speed;
     private int currentHP;
     private int maxHP;
+    private String pathToImage;
 
     private Type type;
 
@@ -17,12 +26,13 @@ public class Pokemon {
     private Attack attack3;
     private Attack attack4;
 
-    public Pokemon(String name, int speed, int currentHP, int maxHP, Type type, List<Attack> list){
+    public Pokemon(String name, int speed, int currentHP, int maxHP, Type type, String pathToImage, List<Attack> list){
         setAttack1(list.get(0));
         setAttack2(list.get(1));
         setAttack3(list.get(2));
         setAttack4(list.get(3));
         setCurrentHP(currentHP);
+        setPathToImage(pathToImage);
         setMaxHP(maxHP);
         setType(type);
         setSpeed(speed);
@@ -66,6 +76,8 @@ public class Pokemon {
         return type;
     }
 
+    public String getPathToImage(){return pathToImage;}
+
     public void setAttack1(Attack attack1) {
         this.attack1 = attack1;
     }
@@ -100,5 +112,24 @@ public class Pokemon {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public void setPathToImage(String pathToImage) {
+        this.pathToImage = pathToImage;
+    }
+
+    public Image render(){
+        FileInputStream fileInputStream;
+        File f;
+
+        try {
+                f = new File(this.pathToImage);
+                fileInputStream = new FileInputStream(f);
+                return new Image(fileInputStream);
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+            throw new RuntimeException(this.name + " File not found");
+        }
     }
 }

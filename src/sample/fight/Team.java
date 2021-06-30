@@ -1,7 +1,17 @@
 package sample.fight;
 
+import javafx.event.ActionEvent;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import sample.fight.FightController;
+
+import static sample.Main.loader;
+import static sample.Main.primaryStage;
 
 public class Team {
 
@@ -74,11 +84,10 @@ public class Team {
 
     public Pokemon getfirstPokemonwithHP() {
         for (Pokemon p : team) {
-            if (p.getCurrentHP() > 0) {
+            if (p.getCurrentHP() >= 0) {
                 return p;
             }
         }
         return null;
-    }
-
+   }
 }

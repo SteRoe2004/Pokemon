@@ -17,11 +17,11 @@ import static sample.Main.primaryStage;
 public class EndController {
 
     @FXML
-    private Button returntostartButton;
+    public Button returnButton;
 
     @FXML
-    private void initialize() {
-        returntostartButton.setOnAction(event -> {
+    public void initialize() {
+        returnButton.setOnAction(event -> {
             try {
                 sceneSwitch(event);
             } catch (IOException | URISyntaxException e) {
@@ -31,7 +31,7 @@ public class EndController {
     }
 
     @FXML
-    private void sceneSwitch(ActionEvent event) throws IOException, URISyntaxException {
+    public void sceneSwitch(ActionEvent event) throws IOException, URISyntaxException {
 
         Parent root = loader.load(getClass().getResource("/start.fxml"));
         primaryStage.setScene(new Scene(root));
@@ -39,6 +39,4 @@ public class EndController {
         primaryStage.centerOnScreen();
         primaryStage.show();
     }
-
-
 }
