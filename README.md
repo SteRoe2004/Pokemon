@@ -10,7 +10,7 @@ Pokemon haben Attribute: Health, Speed, Type
 
 Startbildschrim menu einfügen (vllt mehrere Kampfszenarien)
 
-Textfeld --> Kommentare, was passiert
+Textfeld --> Kommentare, was passiert - done
 Typestärken
-Wer greift zerst an --> speed (möglicherweise)
+Wer greift zerst an --> speed (möglicherweise) - done
 wenn mein Team tot ist --> wechsel

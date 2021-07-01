@@ -85,18 +85,19 @@ public class AttackLib {
         attackLib.put(Type.FIRE,firelist);
         attackLib.put(Type.FIRE,firelist);
         attackLib.put(Type.FIRE,firelist);
-        attackLib.put(Type.WATER,waterlist);
-        attackLib.put(Type.WATER,waterlist);
-        attackLib.put(Type.WATER,waterlist);
-        attackLib.put(Type.WATER,waterlist);
-        attackLib.put(Type.WATER,waterlist);
-        attackLib.put(Type.WATER,waterlist);
-        attackLib.put(Type.WATER,waterlist);
-        attackLib.put(Type.WATER,waterlist);
         attackLib.put(Type.FIRE,firelist);
         attackLib.put(Type.FIRE,firelist);
         attackLib.put(Type.FIRE,firelist);
         attackLib.put(Type.FIRE,firelist);
+        attackLib.put(Type.WATER,waterlist);
+        attackLib.put(Type.WATER,waterlist);
+        attackLib.put(Type.WATER,waterlist);
+        attackLib.put(Type.WATER,waterlist);
+        attackLib.put(Type.WATER,waterlist);
+        attackLib.put(Type.WATER,waterlist);
+        attackLib.put(Type.WATER,waterlist);
+        attackLib.put(Type.WATER,waterlist);
+
     }
 }
 

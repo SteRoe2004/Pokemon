@@ -3,22 +3,17 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="584.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.start.StartController">
    <children>
-      <BorderPane prefHeight="408.0" prefWidth="605.0">
-         <center>
-            <Button fx:id="startButton" mnemonicParsing="false" prefHeight="81.0" prefWidth="128.0" text="Start Game" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="Arial" size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </Button>
-         </center>
-      </BorderPane>
+      <Button fx:id="startButton" layoutX="228.0" layoutY="163.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="128.0" text="Start Game">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

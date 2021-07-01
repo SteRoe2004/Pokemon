@@ -82,9 +82,9 @@ public class Team {
    //     this.pokemon6 = pokemon6;
    // }
 
-    public Pokemon getfirstPokemonwithHP() {
+    public Pokemon getnextPokemonwithHP() {
         for (Pokemon p : team) {
-            if (p.getCurrentHP() >= 0) {
+            if (p.getCurrentHP() > 0) {
                 return p;
             }
         }

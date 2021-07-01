@@ -7,10 +7,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.end.EndController">
    <children>
-      <Button fx:id="returnButton" layoutX="225.0" layoutY="200.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" text="Return to Start" />
+      <Button fx:id="returnButton" layoutX="225.0" layoutY="253.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" text="Return to Start" />
       <Label layoutX="144.0" layoutY="82.0" prefHeight="51.0" prefWidth="312.0" text="GAME OVER">
          <font>
             <Font name="Courier New" size="56.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="177.0" prefHeight="45.0" prefWidth="519.0" text="Go to the next Pokéstop to try again...">
+         <font>
+            <Font name="Courier New" size="22.0" />
          </font>
       </Label>
    </children>
